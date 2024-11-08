@@ -1,0 +1,39 @@
+service: email-data-collection
+
+provider:
+  name: aws
+  runtime: nodejs18.x  # Node.js 18 runtime
+  region: eu-west-1  # Update with your preferred region
+  environment:
+    S3_BUCKET_NAME: elt-crm-data # S3 bucket name where data will be uploaded
+    GAS_URL: https://script.google.com/macros/s/AKfycbxD6MPOUmqW3u4qjsG1T4rKiVnkFeoIr3VpAl_voFtRZueOD3vxC3wN1dhz508_pznW6A/exec
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "s3:PutObject"
+      Resource:
+        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*  # Allow Lambda to upload to the S3 bucket
+    - Effect: Allow
+      Action:
+        - "logs:*"
+      Resource:
+        - "*"
+
+functions:
+  collectEmailData:
+    handler: handler.lambdaHandler
+    events:
+      - http:
+          path: collect-data
+          method: get  # Use POST if needed
+          cors: true  # Optional: Enable CORS if needed
+
+# Removed the 'Resources' section because the S3 bucket already exists
+
+custom:
+  esbuild:
+    bundle: true  # Enable bundling
+    minify: true  # Minify the output
+    target: node18  # Specify Node.js 18 as the target runtime
+    platform: node  # Use the Node.js platform
+    sourcemap: true  # Enable sourcemaps for debugging
