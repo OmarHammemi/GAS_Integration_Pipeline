@@ -2,14 +2,6 @@
 
 This project implements an **ELT pipeline** for collecting email data, loading it into S3, and integrating with **Google Apps Script (GAS)** for further processing.
 
-## Table of Contents
-1. [Overview](#overview)
-2. [Getting Started](#getting-started)
-3. [Deployment](#deployment)
-4. [Lambda Functions](#lambda-functions)
-5. [GAS Integration](#gas-integration)
-6. [Troubleshooting](#troubleshooting)
-
 ## Overview
 - **Lambda Functions** collect and process email data.
 - **API Gateway** exposes an endpoint for data collection.
