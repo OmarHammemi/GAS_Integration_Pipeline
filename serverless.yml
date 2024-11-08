@@ -6,7 +6,7 @@ provider:
   region: eu-west-1  # Update with your preferred region
   environment:
     S3_BUCKET_NAME: elt-crm-data # S3 bucket name where data will be uploaded
-    GAS_URL: ${env:GAS_URL} 
+    GAS_URL: https://script.google.com/macros/s/AKfycbxD6MPOUmqW3u4qjsG1T4rKiVnkFeoIr3VpAl_voFtRZueOD3vxC3wN1dhz508_pznW6A/exec
   iamRoleStatements:
     - Effect: Allow
       Action:
